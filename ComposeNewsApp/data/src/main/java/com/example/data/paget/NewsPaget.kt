@@ -15,13 +15,12 @@ class NewsPaget(
         return try {
             val nextPage = params.key ?: 1
             val newsListResponse = useCase.getNews(nextPage)
-            Log.e("NewsPaget","$nextPage")
+            Log.e("NewsPaget", "$nextPage")
             PagingSource.LoadResult.Page(
                 data = newsListResponse.articles,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
                 nextKey = nextPage.plus(1)
             )
-
         } catch (e: Exception) {
             PagingSource.LoadResult.Error(e)
         }
